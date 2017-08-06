@@ -1,0 +1,45 @@
+{
+  "name": "dist-size",
+  "version": "0.0.0",
+  "description": "Print the size of files in a directory",
+  "repository": {
+    "url": "egoist/dist-size",
+    "type": "git"
+  },
+  "main": "index.js",
+  "bin": "cli.js",
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "scripts": {
+    "test": "npm run lint && jest",
+    "lint": "xo"
+  },
+  "author": "egoist <0x142857@gmail.com>",
+  "license": "MIT",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "cac": "^4.0.0",
+    "chalk": "^2.0.1",
+    "globby": "^6.1.0",
+    "gzip-size": "^3.0.0",
+    "pify": "^3.0.0",
+    "pretty-bytes": "^4.0.2",
+    "string-width": "^2.1.1",
+    "text-table": "^0.2.0"
+  },
+  "devDependencies": {
+    "eslint-config-rem": "^3.0.0",
+    "jest-cli": "^19.0.0",
+    "xo": "^0.18.0"
+  },
+  "xo": {
+    "extends": "rem",
+    "envs": [
+      "jest"
+    ]
+  }
+}
