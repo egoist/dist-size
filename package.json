@@ -1,6 +1,6 @@
 {
   "name": "dist-size",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Print the size of files in a directory",
   "repository": {
     "url": "egoist/dist-size",
