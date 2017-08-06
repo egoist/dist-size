@@ -31,6 +31,27 @@ dist-size -e ts
 # defaults to `js,css`
 ```
 
+## API
+
+```js
+const distSize = require('dist-size')
+
+distSize({
+  baseDir,
+  extensions
+}).then(res => {
+  for (const absolutePath in res) {
+    console.log(res[absolutePath])
+    //=>
+    {
+      name,
+      size,
+      gzip
+    }
+  }
+})
+```
+
 ## Contributing
 
 1. Fork it!
