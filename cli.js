@@ -5,7 +5,9 @@ const prettyBytes = require('pretty-bytes')
 const table = require('text-table')
 const chalk = require('chalk')
 const stringWidth = require('string-width')
+const update = require('update-notifier')
 const main = require('./')
+const pkg = require('./package')
 
 const cli = cac()
 
@@ -49,3 +51,5 @@ cli.option('extensions', {
 })
 
 cli.parse()
+
+update({ pkg }).notify()
