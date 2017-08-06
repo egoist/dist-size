@@ -27,6 +27,17 @@ cli.command('*', 'My Default Command', (input, flags) => {
         chalk.green(prettyBytes(file.gzip))
       ]))
 
+      if (options.sum) {
+        const size = res.reduce((sum, file) => sum + file.size, 0)
+        const gzip = res.reduce((sum, file) => sum + file.gzip, 0)
+        output.push(['  ----', '----', '----'].map(v => chalk.dim(v)))
+        output.push([
+          chalk.dim('  Total:'),
+          prettyBytes(size),
+          chalk.green(prettyBytes(gzip))
+        ])
+      }
+
       console.log()
       console.log(table(output, {
         stringLength: stringWidth
@@ -39,7 +50,11 @@ cli.command('*', 'My Default Command', (input, flags) => {
     })
 })
 
-cli.option('extensions', {
+cli.option('sum', {
+  desc: 'Display sum',
+  alias: 's',
+  type: 'boolean'
+}).option('extensions', {
   desc: 'Specify extensions',
   alias: 'e',
   default: 'js,css'
