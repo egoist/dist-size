@@ -5,11 +5,9 @@ const gzipSize = pify(require('gzip-size'))
 // eslint-disable-next-line import/order
 const fs = pify(require('fs'))
 
-module.exports = function ({
-  baseDir = 'dist',
-  extensions = ['js', 'css'],
-  sort = true
-} = {}) {
+module.exports = function(
+  { baseDir = 'dist', extensions = ['js', 'css'], sort = true } = {}
+) {
   baseDir = path.resolve(baseDir)
 
   if (typeof extensions === 'string') {
@@ -26,23 +24,28 @@ module.exports = function ({
   return globby([`**/*.${extensions}`, '!**/node_modules/**'], {
     cwd: baseDir,
     nodir: true,
-    statCache })
+    statCache
+  })
     .then(() => {
-      return Promise.all(Object.keys(statCache).map(filepath => {
-        const stat = statCache[filepath]
-        return fs.readFile(filepath, 'utf8')
-          .then(str => gzipSize(str))
-          .then(size => {
-            const name = path.relative(baseDir, filepath)
-            return {
-              path: filepath,
-              name,
-              size: stat.size,
-              gzip: size
-            }
-          })
-      }))
-    }).then(res => {
+      return Promise.all(
+        Object.keys(statCache).map(filepath => {
+          const stat = statCache[filepath]
+          return fs
+            .readFile(filepath, 'utf8')
+            .then(str => gzipSize(str))
+            .then(size => {
+              const name = path.relative(baseDir, filepath)
+              return {
+                path: filepath,
+                name,
+                size: stat.size,
+                gzip: size
+              }
+            })
+        })
+      )
+    })
+    .then(res => {
       if (sort) {
         res = res.sort((a, b) => {
           return b.size - a.size
