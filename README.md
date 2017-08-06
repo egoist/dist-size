@@ -25,6 +25,9 @@ dist-size ./path/to/folder
 # or custom extensions
 dist-size -e ts
 # defaults to `js,css`
+
+# also print the total sum
+dist-size --sum
 ```
 
 ## API
