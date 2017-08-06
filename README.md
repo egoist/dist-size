@@ -34,7 +34,9 @@ const distSize = require('dist-size')
 
 distSize({
   baseDir,
-  extensions
+  extensions,
+  limit,
+  sort
 }).then(res => {
   for (const file of res) {
     console.log(file)
