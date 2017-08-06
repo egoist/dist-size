@@ -8,8 +8,7 @@ const fs = pify(require('fs'))
 module.exports = function ({
   baseDir = 'dist',
   extensions = ['js', 'css'],
-  sort = true,
-  limit = 0
+  sort = true
 } = {}) {
   baseDir = path.resolve(baseDir)
 
@@ -48,10 +47,6 @@ module.exports = function ({
         res = res.sort((a, b) => {
           return b.size - a.size
         })
-      }
-
-      if (limit) {
-        res = res.slice(0, limit)
       }
 
       return res

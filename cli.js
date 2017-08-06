@@ -18,20 +18,33 @@ cli.command('*', 'My Default Command', (input, flags) => {
 
   main(options)
     .then(res => {
+      if (res.length === 0) {
+        return console.log('No matched files.')
+      }
+
       const output = [
         ['  File', 'Size', 'Gzip'].map(v => chalk.bold(v)),
         ['  ----', '----', '----'].map(v => chalk.dim(v))
-      ].concat(res.map(file => [
+      ].concat(res.slice(0, flags.limit || res.length).map(file => [
         '  ' + file.name,
         prettyBytes(file.size),
         chalk.green(prettyBytes(file.gzip))
       ]))
 
+      if (flags.limit && res.length > flags.limit) {
+        const count = res.length - flags.limit
+        output.push([
+          `  ...${count} more item${count > 1 ? 's' : ''} ${count > 1 ? 'are' : 'is'} hidden`,
+          '',
+          ''
+        ].map(v => chalk.dim.italic(v)))
+      }
+
       const size = res.reduce((sum, file) => sum + file.size, 0)
       const gzip = res.reduce((sum, file) => sum + file.gzip, 0)
       output.push(['  ----', '----', '----'].map(v => chalk.dim(v)))
       output.push([
-        chalk.dim('  Total:'),
+        '  Total:',
         prettyBytes(size),
         chalk.green(prettyBytes(gzip))
       ])
