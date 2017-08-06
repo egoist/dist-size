@@ -7,7 +7,9 @@ const fs = pify(require('fs'))
 
 module.exports = function ({
   baseDir = 'dist',
-  extensions = ['js', 'css']
+  extensions = ['js', 'css'],
+  sort = true,
+  limit = 0
 } = {}) {
   baseDir = path.resolve(baseDir)
 
@@ -22,7 +24,6 @@ module.exports = function ({
   }
 
   const statCache = {}
-  const res = {}
   return globby([`**/*.${extensions}`, '!**/node_modules/**'], {
     cwd: baseDir,
     nodir: true,
@@ -34,13 +35,25 @@ module.exports = function ({
           .then(str => gzipSize(str))
           .then(size => {
             const name = path.relative(baseDir, filepath)
-            res[filepath] = {
+            return {
+              path: filepath,
               name,
               size: stat.size,
               gzip: size
             }
           })
       }))
+    }).then(res => {
+      if (sort) {
+        res = res.sort((a, b) => {
+          return b.size - a.size
+        })
+      }
+
+      if (limit) {
+        res = res.slice(0, limit)
+      }
+
+      return res
     })
-    .then(() => res)
 }

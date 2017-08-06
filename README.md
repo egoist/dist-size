@@ -5,7 +5,7 @@
 
 <table>
   <tr>
-    <td><img src="https://i.loli.net/2017/08/06/59869d6f344da.png" alt="preview"></td>
+    <td><img src="https://i.loli.net/2017/08/06/5986a48687836.png" alt="preview"></td>
   </tr>
 </table>
 
@@ -40,11 +40,12 @@ distSize({
   baseDir,
   extensions
 }).then(res => {
-  for (const absolutePath in res) {
-    console.log(res[absolutePath])
+  for (const file of res) {
+    console.log(file)
     //=>
     {
       name,
+      path,
       size,
       gzip
     }

@@ -19,18 +19,13 @@ cli.command('*', 'My Default Command', (input, flags) => {
   main(options)
     .then(res => {
       const output = [
-        ['  File', 'Size', 'Gzip'].map(v => chalk.bold(v))
-      ]
-
-      // eslint-disable-next-line guard-for-in
-      for (const filepath in res) {
-        const file = res[filepath]
-        output.push([
-          '  ' + chalk.cyan(file.name),
-          chalk.green(prettyBytes(file.size)),
-          chalk.green(prettyBytes(file.gzip))
-        ])
-      }
+        ['  File', 'Size', 'Gzip'].map(v => chalk.bold(v)),
+        ['  ----', '----', '----'].map(v => chalk.dim(v))
+      ].concat(res.map(file => [
+        '  ' + file.name,
+        prettyBytes(file.size),
+        chalk.green(prettyBytes(file.gzip))
+      ]))
 
       console.log()
       console.log(table(output, {
@@ -48,6 +43,9 @@ cli.option('extensions', {
   desc: 'Specify extensions',
   alias: 'e',
   default: 'js,css'
+}).option('limit', {
+  desc: 'Limit output files',
+  default: 100
 })
 
 cli.parse()
