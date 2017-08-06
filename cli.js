@@ -27,6 +27,15 @@ cli.command('*', 'My Default Command', (input, flags) => {
         chalk.green(prettyBytes(file.gzip))
       ]))
 
+      const size = res.reduce((sum, file) => sum + file.size, 0)
+      const gzip = res.reduce((sum, file) => sum + file.gzip, 0)
+      output.push(['  ----', '----', '----'].map(v => chalk.dim(v)))
+      output.push([
+        chalk.dim('  Total:'),
+        prettyBytes(size),
+        chalk.green(prettyBytes(gzip))
+      ])
+
       console.log()
       console.log(table(output, {
         stringLength: stringWidth
