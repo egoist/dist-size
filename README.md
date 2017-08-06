@@ -3,7 +3,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/dist-size.svg?style=flat)](https://npmjs.com/package/dist-size) [![NPM downloads](https://img.shields.io/npm/dm/dist-size.svg?style=flat)](https://npmjs.com/package/dist-size) [![CircleCI](https://circleci.com/gh/egoist/dist-size/tree/master.svg?style=shield)](https://circleci.com/gh/egoist/dist-size/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)
 
-<img src="https://i.loli.net/2017/08/06/5986a6715e3ce.png" alt="preview" width="500">
+<img src="https://i.loli.net/2017/08/06/5986eabfe8cbc.png" alt="preview" width="500">
 
 ## Install
 
