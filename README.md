@@ -23,8 +23,8 @@ dist-size
 dist-size ./path/to/folder
 
 # or custom extensions
-dist-size -e ts
-# defaults to `js,css`
+dist-size -e js,css
+# defaults to `*` (any extension)
 ```
 
 ## API

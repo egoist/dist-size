@@ -78,7 +78,7 @@ cli
   .option('extensions', {
     desc: 'Specify extensions',
     alias: 'e',
-    default: 'js,css'
+    default: '*'
   })
   .option('limit', {
     desc: 'Limit output files',

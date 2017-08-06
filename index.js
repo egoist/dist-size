@@ -6,7 +6,7 @@ const gzipSize = pify(require('gzip-size'))
 const fs = pify(require('fs'))
 
 module.exports = function(
-  { baseDir = 'dist', extensions = ['js', 'css'], sort = true } = {}
+  { baseDir = 'dist', extensions = '*', sort = true } = {}
 ) {
   baseDir = path.resolve(baseDir)
 
