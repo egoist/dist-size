@@ -35,9 +35,12 @@ const distSize = require('dist-size')
 distSize({
   baseDir,
   extensions,
-  sort
+  sort,
+  limit,
+  displayRelativePath,
+  displayTotal
 }).then(res => {
-  for (const file of res) {
+  for (const file of res.toJson()) {
     console.log(file)
     //=>
     {
