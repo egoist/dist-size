@@ -74,22 +74,22 @@ module.exports = function(
     nodir: true,
     statCache
   })
-    .then(() => {
-      return Promise.all(
-        Object.keys(statCache).map(filepath => {
-          const stat = statCache[filepath]
-          return fs
-            .readFile(filepath, 'utf8')
-            .then(str => gzipSize(str))
-            .then(size => {
-              const name = path.relative(baseDir, filepath)
-              return {
-                path: filepath,
-                name,
-                size: stat.size,
-                gzip: size
-              }
-            })
+  .then((files) => {
+    return Promise.all(
+      files.map(filepath => {
+        const fullFilePath = path.join(baseDir, filepath);
+        return fs
+          .readFile(fullFilePath, 'utf8')
+          .then(str => gzipSize(str))
+          .then(size => {
+            const name = path.relative(baseDir, fullFilePath);
+            return {
+              path: fullFilePath,
+              name,
+              size: fs.statSync(fullFilePath).size,
+              gzip: size
+            }
+          })
         })
       )
     })
